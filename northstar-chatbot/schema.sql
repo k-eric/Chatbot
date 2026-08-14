@@ -1,6 +1,9 @@
-insert into orders (order_number, customer_name, status, return_eligible, delivery_date) values
-('ORD1006', 'Fiona Gallagher', 'Delivered', true, current_date - interval '12 days'),
-('ORD1007', 'George Clark', 'In Transit', false, current_date + interval '1 day'),
-('ORD1008', 'Hannah Abbott', 'Delivered', false, current_date - interval '40 days'),
-('ORD1009', 'Ian Malcolm', 'Returned', false, current_date - interval '15 days'),
-('ORD1010', 'Julia Roberts', 'Delivered', true, current_date - interval '1 day');
+-- Member 4: Seed 5 Sample Orders matching your EXACT table columns
+INSERT INTO orders (order_number, customer_name, status, return_eligible, delivery_date)
+VALUES 
+  ('ORD1001', 'Alice Johnson', 'Delivered', true, CURRENT_DATE - INTERVAL '10 days'),
+  ('ORD1002', 'Bob Smith', 'Delivered', false, CURRENT_DATE - INTERVAL '45 days'),
+  ('ORD1003', 'Charlie Brown', 'Delivered', false, CURRENT_DATE - INTERVAL '5 days'),
+  ('ORD1004', 'Diana Prince', 'Pending Return', false, CURRENT_DATE - INTERVAL '12 days'),
+  ('ORD1005', 'Evan Wright', 'Delivered', true, CURRENT_DATE - INTERVAL '2 days')
+ON CONFLICT (order_number) DO NOTHING;
