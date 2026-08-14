@@ -1,0 +1,106 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat-lookup",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "14edc66d-7ce9-46c0-83c2-ff2afbabcbb4",
+      "name": "Webhook",
+      "webhookId": "09323215-cd47-46d2-bf89-dfaba1224aba"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "orders",
+        "filterType": "string",
+        "filterString": "=order_number=eq.{{ $json.body.order_number }}"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "70a1f4d9-6d35-4e20-8ae6-677177c52774",
+      "name": "Get many rows",
+      "credentials": {
+        "supabaseApi": {
+          "id": "ZfLTRp8mnZBlkvi7",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "089f0bd0-ce86-433c-a3fa-4145fc09722b",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "body": {
+            "order_number": "ORD1001"
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "0242d9fb-5891-4d6c-9a34-b86ec93dca52",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "390cffbb897cc6b4472a3378630f461ff3de0b02f32c7d50e7f38498e90288a5"
+  },
+  "nodeGroups": [],
+  "id": "WuRfQtRgxUp7cxgL",
+  "tags": []
+}
